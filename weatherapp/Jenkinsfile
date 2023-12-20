@@ -1,4 +1,51 @@
 pipeline {
-    agent {
-        label 'your-label-name'
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout source code from version control
+                checkout scm
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                // Build your project (replace 'mvn clean install' with your build command)
+                sh 'mvn clean install'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                // Run tests (replace 'mvn test' with your test command)
+                sh 'mvn test'
+            }
+        }
+        
+        stage('Deploy to Dev') {
+            steps {
+                // Deploy to development environment
+                sh './deploy-to-dev.sh'
+            }
+        }
+        
+        stage('Deploy to Prod') {
+            steps {
+                // Deploy to production environment
+                sh './deploy-to-prod.sh'
+            }
+        }
     }
+    
+    post {
+        success {
+            // This block will be executed if the pipeline is successful
+            echo 'Pipeline succeeded! Trigger additional actions if needed.'
+        }
+        failure {
+            // This block will be executed if the pipeline fails
+            echo 'Pipeline failed! Handle failure scenarios.'
+        }
+    }
+}
