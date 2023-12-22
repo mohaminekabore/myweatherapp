@@ -2,9 +2,6 @@ pipeline {
     agent {
         label("dev")
     }
-    environment {
-        DOCKERHUB_CREDENTIALS = credentials('DOCKERHUB')
-    }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         disableConcurrentBuilds()
@@ -99,9 +96,16 @@ pipeline {
         //     }
         // }
 
-        stage('Login') {
+        stage('Login to Docker Hub') {  
             steps {
-                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                script {
+                    // Define your Docker Hub username and access token
+                    def dockerHubUser = 'mohaminekabore'
+                    def dockerHubAccessToken = 'dckr_pat_4VkKPK0BlrhPbua_s4gt9vxdJOU'
+
+                    // Docker login command with access token
+                    sh "echo ${dockerHubAccessToken} | docker login -u ${dockerHubUser} --password-stdin"
+                }
             }
         }
     }
