@@ -340,5 +340,20 @@ volumes:
                 '''
             }
         }
+        stage('checking deployment') {
+	      agent { 
+                label "dev"
+                 }
+         when{ 
+          expression {
+            env.GIT_BRANCH == 'origin/kabore' }
+            }
+            steps {
+                sh '''
+            
+            bash weatherapp/verify.sh
+                '''
+            }
+        }
     }
 }
