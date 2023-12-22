@@ -130,7 +130,7 @@ pipeline {
                 '''
             }
         }
-        stage('Build auth') {
+        stage('Build UI') {
             steps {
                 sh '''
                     cd $WORKSPACE/weatherapp/UI
@@ -138,7 +138,7 @@ pipeline {
                 '''
             }
         }
-        stage('Push auth') {
+        stage('Push UI') {
             when {
                 expression {
                     env.GIT_BRANCH == 'origin/kabore'
