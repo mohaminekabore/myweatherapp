@@ -1,1 +1,5 @@
 FROM mysql
+ENV MYSQL_ROOT_PASSWORD=my-secret-pw
+ENV DB_PASSWORD=my-secret-pw
+ENV MYSQL_USER=mohamine
+ENV MYSQL_PASSWORD=mohamine
