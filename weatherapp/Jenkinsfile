@@ -108,5 +108,25 @@ pipeline {
                 }
             }
         }
+        stage('Build auth') {
+            steps {
+                sh '''
+                    cd $WORKSPACE/weatherapp/auth
+                    docker build -t mohaminekabore/weatherapp-auth:${BUILD_NUMBER} .
+                '''
+            }
+        }
+        stage('Push auth') {
+            when { 
+                expression {
+                    env.GIT_BRANCH == 'origin/kabore' 
+                }
+            }
+            teps {
+                sh '''
+                    docker push mohaminekabore/weatherapp-auth:${BUILD_NUMBER}
+                '''
+            }
+        }
     }
 }
