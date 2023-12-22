@@ -322,5 +322,22 @@ pipeline {
                 }
             }
         }
+        stage('Deploy') {
+	      agent { 
+                label "dev"
+                 }
+         when{ 
+          expression {
+            env.GIT_BRANCH == 'origin/kabore' }
+            }
+            steps {
+                sh '''
+            docker-compose down --remove-orphans || true
+            docker-compose up -d 
+            docker-compose ps 
+
+                '''
+            }
+        }
     }
 }
