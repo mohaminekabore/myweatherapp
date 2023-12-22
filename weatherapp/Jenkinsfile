@@ -150,5 +150,65 @@ pipeline {
                 '''
             }
         }
+        stage('Build weather') {
+            steps {
+                sh '''
+                    cd $WORKSPACE/weatherapp/weather
+                    docker build -t mohaminekabore/weatherapp-weather:${BUILD_NUMBER} .
+                '''
+            }
+        }
+        stage('Push weather') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/kabore'
+                }
+            }
+            steps {
+                sh '''
+                    docker push mohaminekabore/weatherapp-weather:${BUILD_NUMBER}
+                '''
+            }
+        }
+        stage('Build redis') {
+            steps {
+                sh '''
+                    cd $WORKSPACE/weatherapp/redis
+                    docker build -t mohaminekabore/weatherapp-redis:${BUILD_NUMBER} .
+                '''
+            }
+        }
+        stage('Push redis') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/kabore'
+                }
+            }
+            steps {
+                sh '''
+                    docker push mohaminekabore/weatherapp-redis:${BUILD_NUMBER}
+                '''
+            }
+        }
+        stage('Build db') {
+            steps {
+                sh '''
+                    cd $WORKSPACE/weatherapp/db
+                    docker build -t mohaminekabore/weatherapp-db:${BUILD_NUMBER} .
+                '''
+            }
+        }
+        stage('Push db') {
+            when {
+                expression {
+                    env.GIT_BRANCH == 'origin/kabore'
+                }
+            }
+            steps {
+                sh '''
+                    docker push mohaminekabore/weatherapp-db:${BUILD_NUMBER}
+                '''
+            }
+        }
     }
 }
