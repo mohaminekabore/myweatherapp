@@ -96,7 +96,7 @@ pipeline {
         //     }
         // }
 
-        stage('Login to Docker Hub') {  
+        stage('Login to Docker Hub') {
             steps {
                 script {
                     // Define your Docker Hub username and access token
@@ -108,6 +108,7 @@ pipeline {
                 }
             }
         }
+
         stage('Build auth') {
             steps {
                 sh '''
@@ -116,13 +117,14 @@ pipeline {
                 '''
             }
         }
+
         stage('Push auth') {
-            when { 
+            when {
                 expression {
-                    env.GIT_BRANCH == 'origin/kabore' 
+                    env.GIT_BRANCH == 'origin/kabore'
                 }
             }
-            teps {
+            steps {
                 sh '''
                     docker push mohaminekabore/weatherapp-auth:${BUILD_NUMBER}
                 '''
