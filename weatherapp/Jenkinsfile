@@ -242,7 +242,7 @@ pipeline {
                                 services:
                                     db:
                                         container_name: weatherapp-db
-                                        image: devopseasylearning/weatherapp-db:${BUILD_NUMBER}
+                                        image: mohaminekabore/weatherapp-db:${BUILD_NUMBER}
                                         environment:
                                             MYSQL_ROOT_PASSWORD: ${WEATHERAPP_MYSQL_ROOT_PASSWORD}
                                         volumes:
@@ -253,7 +253,7 @@ pipeline {
                                     
                                     redis:
                                         container_name: weatherapp-redis
-                                        image: devopseasylearning/weatherapp-redis:${BUILD_NUMBER}
+                                        image: mohaminekabore/weatherapp-redis:${BUILD_NUMBER}
                                         networks:
                                             - weatherapp
                                         environment:
@@ -265,7 +265,7 @@ pipeline {
                                     
                                     weather:
                                         container_name: weatherapp-weather
-                                        image: devopseasylearning/weatherapp-weather:${BUILD_NUMBER}
+                                        image: mohaminekabore/weatherapp-weather:${BUILD_NUMBER}
                                         expose:
                                             - 5000
                                         environment:
@@ -279,7 +279,7 @@ pipeline {
                                     
                                     auth:
                                         container_name: weatherapp-auth
-                                        image: devopseasylearning/weatherapp-auth:${BUILD_NUMBER}
+                                        image: mohaminekabore/weatherapp-auth:${BUILD_NUMBER}
                                         environment:
                                             DB_HOST: db
                                             DB_PASSWORD: ${WEATHERAPP_DB_PASSWORD}
@@ -293,7 +293,7 @@ pipeline {
                                     
                                     ui:
                                         container_name: weatherapp-ui
-                                        image: devopseasylearning/weatherapp-ui:${BUILD_NUMBER}
+                                        image: mohaminekabore/weatherapp-ui:${BUILD_NUMBER}
                                         environment:
                                             AUTH_HOST: auth
                                             AUTH_PORT: 8080
