@@ -278,7 +278,7 @@ services:
 
   auth:
     container_name: weatherapp-auth
-    image: redis
+    image: mohaminekabore/weatherapp-auth
     environment:
       DB_HOST: db
       DB_PASSWORD: ${WEATHERAPP_DB_PASSWORD}
