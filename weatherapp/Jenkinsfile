@@ -237,7 +237,7 @@ pipeline {
                         string(credentialsId: 'WEATHERAPP_DB_PASSWORD', variable: 'WEATHERAPP_DB_PASSWORD')
                     ]) {
                       def dockerComposeContent = '''
-version: '3.5'
+version: '3.3'
 services:
   db:
     container_name: weatherapp-db
