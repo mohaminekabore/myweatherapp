@@ -264,7 +264,7 @@ services:
 
   weather:
     container_name: weatherapp-weather
-    image: mohaminekabore/weatherapp-weather:${BUILD_NUMBER}
+    image: redis
     expose:
       - 5007
     environment:
