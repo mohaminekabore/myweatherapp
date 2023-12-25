@@ -264,9 +264,9 @@ services:
 
   weather:
     container_name: weatherapp-weather
-    image: redis
+    image: mohaminekabore/weatherapp-weather:${BUILD_NUMBER}
     expose:
-      - 5007
+      - 5005
     environment:
       APIKEY: ${WEATHERAPP_APIKEY}
     networks:
@@ -283,7 +283,7 @@ services:
       DB_HOST: db
       DB_PASSWORD: ${WEATHERAPP_DB_PASSWORD}
     expose:
-      - 8087
+      - 8085
     networks:
       - weatherapp
     restart: always
@@ -295,9 +295,9 @@ services:
     image: mohaminekabore/weatherapp-ui:${BUILD_NUMBER}
     environment:
       AUTH_HOST: auth
-      AUTH_PORT: 8087
+      AUTH_PORT: 8085
       WEATHER_HOST: weather
-      WEATHER_PORT: 5007
+      WEATHER_PORT: 5005
       REDIS_USER: redis
       REDIS_PASSWORD: ${WEATHERAPP_REDIS_PASSWORD}
     expose:
